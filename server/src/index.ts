@@ -1,15 +1,17 @@
-import express from 'express';
-import ExcelJS from 'exceljs';
+import {App} from "./app";
 
-const PORT = 5000;
+function main(){
+    const app = new App(process.env.PORT);
+    app.start();
+}
 
-const app = express();
+main();
 
-app.get('/', (req, res) => {
-    const workbook = new ExcelJS.Workbook();
-    const sheet = workbook.addWorksheet('My Sheet');
-    workbook.worksheets[0].getCell('C3').value = 'vkusik';
-    workbook.xlsx.writeFile("Working.xlsx");
-});
-
-app.listen(PORT, ()=> console.log('SERVER STARTED ON PORT ' + PORT))
+// import express from 'express';
+// import ExcelJS from 'exceljs';
+// app.get('/', (req, res) => {
+//     // const workbook = new ExcelJS.Workbook();
+//     // const sheet = workbook.addWorksheet('My Sheet');
+//     // workbook.worksheets[0].getCell('C3').value = 'vkusik';
+//     // workbook.xlsx.writeFile("Working.xlsx");
+// });
