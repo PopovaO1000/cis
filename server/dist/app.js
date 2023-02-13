@@ -17,7 +17,9 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
 const cors_1 = __importDefault(require("cors"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const UserRouter_1 = __importDefault(require("./routers/UserRouter"));
+const CriteriaRouter_1 = __importDefault(require("./routers/CriteriaRouter"));
 class App {
     constructor(port) {
         this.port = port;
@@ -36,9 +38,12 @@ class App {
             credentials: true
         }));
         this.app.use(express_1.default.json());
+        this.app.use((0, express_fileupload_1.default)({}));
+        this.app.use(express_1.default.static('./excel_doc'));
     }
     routes() {
         this.app.use('/users', UserRouter_1.default);
+        this.app.use('/criteria', CriteriaRouter_1.default);
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {

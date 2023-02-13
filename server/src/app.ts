@@ -3,7 +3,9 @@ import { config } from 'dotenv';
 config();
 import { Application } from 'express';
 import cors from 'cors';
-import UserRouter from './routers/UserRouter';
+import fileUpload from "express-fileupload";
+import userRouter from './routers/UserRouter';
+import criteriaRouter from "./routers/CriteriaRouter";
 
 export class App{
     private app: Application;
@@ -24,9 +26,12 @@ export class App{
             credentials: true
         }));
         this.app.use(express.json());
+        this.app.use(fileUpload({}));
+        this.app.use(express.static('./excel_doc'));
     }
     routes(){
-        this.app.use('/users',UserRouter);
+        this.app.use('/users',userRouter);
+        this.app.use('/criteria',criteriaRouter);
     }
     async start(){
         try {

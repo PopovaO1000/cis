@@ -7,7 +7,6 @@ function main(){
 
 main();
 
-// import express from 'express';
 // import ExcelJS from 'exceljs';
 // app.get('/', (req, res) => {
 //     // const workbook = new ExcelJS.Workbook();
